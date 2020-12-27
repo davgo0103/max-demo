@@ -6,9 +6,10 @@
 
 const MAX = require('max-exchange-api-node')
 
+//請自行填入API金鑰
 const max = new MAX({
-  accessKey: "4R8ZI1BkkPs43sEQGYivEmvwpgKjGHltiG2jD74L",//請填入申請的accessKey
-  secretKey: "3wH6VeP0udxxdaYsZXaCLxGUdjjqYu1udHu02uex",//請填入申請的secretKey
+  accessKey: process.env.MAX_API_KEY,
+  secretKey: process.env.MAX_API_SECRET,
 
 });
 
@@ -64,8 +65,11 @@ async function start() {
 
   // Step4: 取得歷史訂單
   console.log("Step4: 取得交易結果")
-  const history = await rest.orders({ market, state: ['wait', 'convert', 'done'] });
-  console.log('交易結果:', history.pop())
+  try {
+    const history = await rest.orders({ market, state: ['wait', 'convert', 'done'] });
+    console.log('交易結果:', history.pop())
+  } catch (error) {console.log("提供的金鑰無法讀取帳號資料");}
+  
 
   // Step5: 如果訂單成功執行應該會看到資產餘額變化
   console.log("Step5: 如果訂單成功執行應該會看到資產餘額變化")
