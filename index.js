@@ -38,34 +38,42 @@ async function start() {
 
   // Step2: 檢查帳號內的btc usdt 持有數量
   console.log("Step2: 檢查帳號內的持有數量")
-  let btcAmount = await rest.account('btc');
-  let usdtAmount = await rest.account('usdt');
-  console.log(`Current balance: btc=${btcAmount.balance} usdt=${usdtAmount.balance}\n`);
+  try {
+    let btcAmount = await rest.account('btc');
+    let usdtAmount = await rest.account('usdt');
+    console.log(`Current balance: btc=${btcAmount.balance} usdt=${usdtAmount.balance}\n`);
+  } catch (error) {console.log("提供的金鑰無法讀取帳號財產")}
+  
 
-  //Step3: Buy 0.001 btc in usdt at best ask price
-  console.log("Step3: Buy 0.001 btc in usdt at best ask price")
-  const response = await rest.placeOrder({
-    market,
-    price: tick.sell,
-    volume: '0.001',
-    side: 'buy',
-    ord_type: 'limit',
-  });
-  console.log(`The response of placing order:`, response);
-  console.log("")
+  //Step3: 購買虛擬貨幣
+  console.log("Step3: 買入 0.001 顆 btc")
+  try {
+    const response = await rest.placeOrder({
+      market,
+      price: tick.sell,
+      volume: '0.001',
+      side: 'buy',
+      ord_type: 'limit',
+    });
+    console.log(`The response of placing order:`, response);
+    console.log("")
+  } catch (error) {console.log("提供的金鑰無法進行虛擬貨幣交易")}
+  
 
   await sleep(1000);
 
-  // Step4: Get order history
-  console.log("Step4: Get order history")
+  // Step4: 取得歷史訂單
+  console.log("Step4: 取得交易結果")
   const history = await rest.orders({ market, state: ['wait', 'convert', 'done'] });
-  console.log('Order history:', history.pop())
+  console.log('交易結果:', history.pop())
 
-  // Step5: If the order is executed successfully, you should see balance change.
-  console.log("Step5: If the order is executed successfully, you should see balance change.")
-  btcAmount = await rest.account('btc');
-  usdtAmount = await rest.account('usdt');
-  console.log(`Current balance: btc=${btcAmount.balance} usdt=${usdtAmount.balance}\n`);
+  // Step5: 如果訂單成功執行應該會看到資產餘額變化
+  console.log("Step5: 如果訂單成功執行應該會看到資產餘額變化")
+  try {
+    btcAmount = await rest.account('btc');
+    usdtAmount = await rest.account('usdt');
+    console.log(`當前餘額: btc=${btcAmount.balance} usdt=${usdtAmount.balance}\n`);
+  } catch (error) {console.log("提供的金鑰無法讀取帳號財產")}
 }
 
 function sleep(ms) {
