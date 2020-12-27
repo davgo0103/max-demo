@@ -73,7 +73,7 @@ async function start() {
     btcAmount = await rest.account('btc');
     usdtAmount = await rest.account('usdt');
     console.log(`當前餘額: btc=${btcAmount.balance} usdt=${usdtAmount.balance}\n`);
-  } catch (error) {console.log("提供的金鑰無法讀取帳號財產")}
+  } catch (error) {console.log("提供的金鑰無法讀取帳號財產");}
 }
 
 function sleep(ms) {
@@ -81,3 +81,4 @@ function sleep(ms) {
      setTimeout( _ => resolve(), ms)
   })
 }
+
