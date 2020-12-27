@@ -32,8 +32,8 @@ async function start() {
   const tick = await rest.ticker({
     market,
   });
-  console.log(`當前市價買入 ${market} 是 ${tick.buy}`);
-  console.log(`當前市價賣出 ${market} 是 ${tick.sell}\n`);
+  console.log(`當前市價買入 ${market} >> ${tick.buy}`);
+  console.log(`當前市價賣出 ${market} >> ${tick.sell}\n`);
 
 
   // Step2: 檢查帳號內的btc usdt 持有數量
