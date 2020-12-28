@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "imap": "^0.8.19",
+    "mailparser": "^3.0.1",
     "max-exchange-api-node": "^1.2.0"
   }
 }
