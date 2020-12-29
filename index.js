@@ -29,7 +29,7 @@ async function buy() {
   //const supported = await rest.markets();
   //console.log('Supported markets:', supported);
 
-  const market = 'btcusdt';
+  const market = 'ethtwd';
 
   // Step1 : 取得市價
   console.log("\x1b[0m",`Step1: 取得 ${market} 市價`)
@@ -43,9 +43,9 @@ async function buy() {
   // Step2: 檢查帳號內的btc usdt 持有數量
   console.log("Step2: 檢查帳號內的持有數量")
   try {
-    let btcAmount = await rest.account('btc');
-    let usdtAmount = await rest.account('usdt');
-    console.log(`Current balance: btc=${btcAmount.balance} usdt=${usdtAmount.balance}\n`);
+    let ethAmount = await rest.account('eth');
+    let twdAmount = await rest.account('twd');
+    console.log(`當前餘額: ETH=${ethAmount.balance} TWD=${twdAmount.balance}\n`);
   } catch (error) {console.log("提供的金鑰無法讀取帳號財產")}
   
 
@@ -59,7 +59,7 @@ async function buy() {
       side: 'buy',
       ord_type: 'limit',
     });
-    console.log(`The response of placing order:`, response);
+    console.log(`下單後伺服器回應:`, response);
     console.log("")
   } catch (error) {console.log("提供的金鑰無法進行虛擬貨幣交易")}
   
@@ -77,9 +77,9 @@ async function buy() {
   // Step5: 如果訂單成功執行應該會看到資產餘額變化
   console.log("Step5: 如果訂單成功執行應該會看到資產餘額變化")
   try {
-    btcAmount = await rest.account('btc');
-    usdtAmount = await rest.account('usdt');
-    console.log(`當前餘額: btc=${btcAmount.balance} usdt=${usdtAmount.balance}\n`);
+    ethAmount = await rest.account('eth');
+    twdAmount = await rest.account('twd');
+    console.log(`當前餘額: ETH=${ethAmount.balance} TWD=${twdAmount.balance}\n`);
     readmail();
   } catch (error) {console.log("提供的金鑰無法讀取帳號財產");}
 }
@@ -90,7 +90,7 @@ async function sell() {
   //const supported = await rest.markets();
   //console.log('Supported markets:', supported);
 
-  const market = 'btcusdt';
+  const market = 'ethtwd';
 
   // Step1 : 取得市價
   console.log("\x1b[0m",`Step1: 取得 ${market} 市價`)
@@ -104,9 +104,9 @@ async function sell() {
   // Step2: 檢查帳號內的btc usdt 持有數量
   console.log("Step2: 檢查帳號內的持有數量")
   try {
-    let btcAmount = await rest.account('btc');
-    let usdtAmount = await rest.account('usdt');
-    console.log(`Current balance: btc=${btcAmount.balance} usdt=${usdtAmount.balance}\n`);
+    let ethAmount = await rest.account('eth');
+    let twdAmount = await rest.account('twd');
+    console.log(`當前餘額: ETH=${ethAmount.balance} TWD=${twdAmount.balance}\n`);
   } catch (error) {console.log("提供的金鑰無法讀取帳號財產")}
   
 
@@ -120,7 +120,7 @@ async function sell() {
       side: 'buy',
       ord_type: 'limit',
     });
-    console.log(`The response of placing order:`, response);
+    console.log(`下單後伺服器回應:`, response);
     console.log("")
   } catch (error) {console.log("提供的金鑰無法進行虛擬貨幣交易")}
   
@@ -138,9 +138,9 @@ async function sell() {
   // Step5: 如果訂單成功執行應該會看到資產餘額變化
   console.log("Step5: 如果訂單成功執行應該會看到資產餘額變化")
   try {
-    btcAmount = await rest.account('btc');
-    usdtAmount = await rest.account('usdt');
-    console.log(`當前餘額: btc=${btcAmount.balance} usdt=${usdtAmount.balance}\n`);
+    ethAmount = await rest.account('eth');
+    twdAmount = await rest.account('twd');
+    console.log(`當前餘額: ETH=${ethAmount.balance} TWD=${twdAmount.balance}\n`);
     readmail();
   } catch (error) {console.log("提供的金鑰無法讀取帳號財產");}
 }
