@@ -50,7 +50,7 @@ async function buy() {
   
 
   //Step3: 購買虛擬貨幣
-  console.log("Step3: 買入 0.001 顆 btc")
+  console.log(`Step3: 買入 ` + market)
   try {
     const response = await rest.placeOrder({
       market,
@@ -67,7 +67,7 @@ async function buy() {
   await sleep(1000);
 
   // Step4: 取得歷史訂單
-  console.log("Step4: 取得交易結果")
+  console.log("\nStep4: 取得交易結果")
   try {
     const history = await rest.orders({ market, state: ['wait', 'convert', 'done'] });
     console.log('交易結果:', history.pop())
@@ -110,8 +110,8 @@ async function sell() {
   } catch (error) {console.log("提供的金鑰無法讀取帳號財產")}
   
 
-  //Step3: 購買虛擬貨幣
-  console.log("Step3: 買入 0.001 顆 btc")
+  //Step3: 賣出虛擬貨幣
+  console.log(`Step3: 賣出 ` + market)
   try {
     const response = await rest.placeOrder({
       market,
@@ -128,7 +128,7 @@ async function sell() {
   await sleep(1000);
 
   // Step4: 取得歷史訂單
-  console.log("Step4: 取得交易結果")
+  console.log("\nStep4: 取得交易結果")
   try {
     const history = await rest.orders({ market, state: ['wait', 'convert', 'done'] });
     console.log('交易結果:', history.pop())
@@ -171,7 +171,7 @@ function readmail() {
     
     imap.once('ready', function () {
         openInbox(function (err, box) {
-            console.log("\x1b[36m","開啟郵箱")
+            console.log("\x1b[36m","開啟信箱")
             title = "";
             if (err) throw err;
             imap.search(['UNSEEN', ['SINCE', (Today.getMonth() + 1) + ' ' + (Today.getDate()-1) + ',' + Today.getFullYear()]], function (err, results) {//未讀的郵件
@@ -184,8 +184,8 @@ function readmail() {
                             stream.pipe(mailparser);//將為解析的資料流pipe到mailparser
                             //郵件頭內容
                             mailparser.on("headers", function (headers) {
-                                console.log("\x1b[36m","郵件頭資訊>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                                console.log("\x1b[36m","郵件主題: " + headers.get('subject'));
+                                console.log("\x1b[36m","信件資訊>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                                console.log("\x1b[36m","信件主旨: " + headers.get('subject'));
                                 title = headers.get('subject');
                             });
     
@@ -196,11 +196,11 @@ function readmail() {
                         console.log("\x1b[36m",'抓取出現錯誤: ' + err);
                     });
                     f.once('end', function () {
-                        console.log("\x1b[36m",'所有郵件抓取完成!');
+                        console.log("\x1b[36m",'所有信件抓取完成!');
                         imap.end();
                     });
                 } catch (error) {
-                    console.log("\x1b[36m","無未讀郵件");
+                    console.log("\x1b[36m","無未讀信件");
                     imap.end();
                 }                
             });
@@ -210,7 +210,7 @@ function readmail() {
         console.log(err);
     });
     imap.once('end', function () {
-        console.log('\x1b[36m','關閉郵箱\n');
+        console.log('\x1b[36m','關閉信箱\n');
         if(title == "快訊： buy"){
           buy();
         }
