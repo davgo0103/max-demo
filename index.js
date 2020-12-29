@@ -38,7 +38,7 @@ async function buy() {
   });
   console.log(`當前市價買入 ${market} >> ${tick.buy}`);
   console.log(`當前市價賣出 ${market} >> ${tick.sell}\n`);
-
+  
 
   // Step2: 檢查帳號內的btc usdt 持有數量
   console.log("Step2: 檢查帳號內的持有數量")
